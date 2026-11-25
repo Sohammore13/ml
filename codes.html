@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Machine Learning Lab Manual - Exam Codes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600;700&display=swap');
+  
+  @page {
+    size: A4;
+    margin: 15mm 15mm 15mm 15mm;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1e293b;
+    line-height: 1.5;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header {
+    text-align: center;
+    border-bottom: 2px solid #3b82f6;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #1e3a8a;
+  }
+  
+  .header p {
+    margin: 4px 0 0;
+    color: #64748b;
+    font-size: 13px;
+  }
+
+  .pattern-card {
+    background: #f8fafc;
+    border-left: 4px solid #3b82f6;
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 24px;
+  }
+  
+  .pattern-card h3 {
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    color: #1e40af;
+  }
+  
+  .pattern-card ol {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 12px;
+    color: #334155;
+  }
+
+  .experiment {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .exp-title {
+    background: #1e293b;
+    color: #f8fafc;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  pre {
+    margin: 0;
+    padding: 12px 14px;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 10.5px;
+    line-height: 1.45;
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+
+  .comment { color: #94a3b8; font-style: italic; }
+  .keyword { color: #f472b6; font-weight: 500; }
+  .string { color: #34d399; }
+  .number { color: #fbbf24; }
+</style>
+</head>
+<body>
+
+<div class='header'>
+  <h1>Machine Learning Lab - Exam Preparation Manual</h1>
+  <p>All 10 Lab Experiments | Standard 7-Step Pattern | Built-in Library Datasets & Visualizations</p>
+</div>
+
+<div class='pattern-card'>
+  <h3>The 7-Step Pattern to Remember for Exam:</h3>
+  <ol>
+    <li><b>Import libraries:</b> sklearn, numpy, matplotlib.pyplot</li>
+    <li><b>Data Collection:</b> Built-in datasets (load_iris, load_breast_cancer, load_diabetes, make_regression)</li>
+    <li><b>Data Preprocessing:</b> StandardScaler fit_transform</li>
+    <li><b>Split Dataset:</b> train_test_split(X, y, test_size=0.2, random_state=42)</li>
+    <li><b>Model Training:</b> model.fit(X_train, y_train)</li>
+    <li><b>Prediction:</b> y_pred = model.predict(X_test)</li>
+    <li><b>Evaluation & Visualization:</b> accuracy_score, confusion_matrix, classification_report & plt.show()</li>
+  </ol>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>EXPERIMENT 1: Complete ML Pipeline &amp; Data Preprocessing</div>
+  <pre><code></code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>print(&quot;\n&quot; + &quot;=&quot;*50)</div>
+  <pre><code>print(&quot;EXPERIMENT 1: ML Pipeline &amp; Preprocessing&quot;)
+print(&quot;=&quot;*50)
+
+# 1. Import libraries
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# 2. Data Collection
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# 3. Data Preprocessing (Scaling)
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# 4. Split the dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42
+)
+
+# 5. Model Evaluation &amp; Visualization
+plt.figure(figsize=(10, 4))
+plt.subplot(1, 2, 1)
+plt.boxplot(X)
+plt.title(&quot;Before Scaling (Raw Iris)&quot;)
+
+plt.subplot(1, 2, 2)
+plt.boxplot(X_scaled)
+plt.title(&quot;After Scaling (StandardScaler)&quot;)
+plt.show()
+
+print(&quot;Preprocessing complete!&quot;)
+print(&quot;X_train shape:&quot;, X_train.shape)
+print(&quot;X_test shape :&quot;, X_test.shape)</code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>EXPERIMENT 2: Model Evaluation (Classification Task)</div>
+  <pre><code></code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>print(&quot;\n&quot; + &quot;=&quot;*50)</div>
+  <pre><code>print(&quot;EXPERIMENT 2: Model Evaluation&quot;)
+print(&quot;=&quot;*50)
+
+# 1. Import libraries
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, ConfusionMatrixDisplay
+
+# 2. Data Collection
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# 3. Data Preprocessing
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+
+# 4. Split the dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 5. Model Training
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X_train, y_train)
+
+# 6. Prediction
+y_pred = model.predict(X_test)
+
+# 7. Model Evaluation &amp; Visualization
+print(&quot;Accuracy:&quot;, accuracy_score(y_test, y_pred))
+print(&quot;\nConfusion Matrix:\n&quot;, confusion_matrix(y_test, y_pred))
+print(&quot;\nClassification Report:\n&quot;, classification_report(y_test, y_pred))
+
+# Visualizing Confusion Matrix
+ConfusionMatrixDisplay.from_estimator(model, X_test, y_test, cmap=&#x27;Blues&#x27;)
+plt.title(&quot;Confusion Matrix - Decision Tree&quot;)
+plt.show()</code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>EXPERIMENT 3: K-Fold Cross Validation, Learning &amp; Validation Curves</div>
+  <pre><code></code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>print(&quot;\n&quot; + &quot;=&quot;*50)</div>
+  <pre><code>print(&quot;EXPERIMENT 3: Cross Validation &amp; Bias-Variance Curves&quot;)
+print(&quot;=&quot;*50)
+
+# 1. Import libraries
+import numpy as np
+from sklearn.model_selection import cross_val_score, learning_curve, validation_curve
+
+# 2. Data Collection
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# 3. Model Definition &amp; K-Fold Cross Validation
+model = DecisionTreeClassifier(random_state=42)
+cv_scores = cross_val_score(model, X, y, cv=5)
+print(&quot;5-Fold Cross Validation Scores:&quot;, cv_scores)
+print(&quot;Mean CV Accuracy:&quot;, cv_scores.mean())
+
+# 4. Learning Curve (Bias vs Variance)
+train_sizes, train_scores, test_scores = learning_curve(model, X, y, cv=5)
+
+# 5. Validation Curve (Varying max_depth)
+param_range = [1, 2, 3, 4, 5]
+v_train, v_test = validation_curve(
+    model, X, y, param_name=&quot;max_depth&quot;, param_range=param_range, cv=5
+)
+
+# 6. Visualization
+plt.figure(figsize=(12, 4))
+
+# Plot 1: Learning Curve
+plt.subplot(1, 2, 1)
+plt.plot(train_sizes, np.mean(train_scores, axis=1), label=&quot;Training Score&quot;, color=&quot;blue&quot;)
+plt.plot(train_sizes, np.mean(test_scores, axis=1), label=&quot;Validation Score&quot;, color=&quot;green&quot;)
+plt.title(&quot;Learning Curve (Bias vs Variance)&quot;)
+plt.xlabel(&quot;Training Examples&quot;)
+plt.ylabel(&quot;Score&quot;)
+plt.legend()
+
+# Plot 2: Validation Curve
+plt.subplot(1, 2, 2)
+plt.plot(param_range, np.mean(v_train, axis=1), label=&quot;Training Score&quot;, color=&quot;blue&quot;)
+plt.plot(param_range, np.mean(v_test, axis=1), label=&quot;Validation Score&quot;, color=&quot;green&quot;)
+plt.title(&quot;Validation Curve (max_depth)&quot;)
+plt.xlabel(&quot;Max Depth&quot;)
+plt.ylabel(&quot;Score&quot;)
+plt.legend()
+plt.show()</code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>EXPERIMENT 4: Gradient Descent Algorithm for Cost Function Optimization</div>
+  <pre><code></code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>print(&quot;\n&quot; + &quot;=&quot;*50)</div>
+  <pre><code>print(&quot;EXPERIMENT 4: Gradient Descent Algorithm&quot;)
+print(&quot;=&quot;*50)
+
+# 1. Import libraries
+from sklearn.datasets import make_regression
+
+# 2. Data Collection (Using Scikit-Learn&#x27;s dataset)
+X, y = make_regression(n_samples=100, n_features=1, noise=15, random_state=42)
+X = X.flatten()
+
+# 3. Initialize Parameters
+m = 0.0
+c = 0.0
+learning_rate = 0.01
+epochs = 100
+n = len(X)
+cost_history = []
+
+# 4. Gradient Descent Optimization Loop
+for epoch in range(epochs):
+    y_pred = m * X + c
+    cost = (1/n) * sum((y - y_pred) ** 2)
+    cost_history.append(cost)
+    
+    # Compute partial derivatives
+    dm = (-2/n) * sum(X * (y - y_pred))
+    dc = (-2/n) * sum(y - y_pred)
+    
+    # Update parameters
+    m = m - learning_rate * dm
+    c = c - learning_rate * dc
+
+print(f&quot;Final Model: y = {m:.2f} * x + {c:.2f}&quot;)
+
+# 5. Visualization
+plt.figure(figsize=(10, 4))
+plt.subplot(1, 2, 1)
+plt.plot(cost_history, color=&#x27;red&#x27;)
+plt.title(&quot;Cost Function vs Epochs&quot;)
+plt.xlabel(&quot;Epoch&quot;)
+plt.ylabel(&quot;Cost (MSE)&quot;)
+
+plt.subplot(1, 2, 2)
+plt.scatter(X, y, color=&#x27;blue&#x27;, label=&#x27;Data Points&#x27;, alpha=0.6)
+plt.plot(X, m * X + c, color=&#x27;red&#x27;, label=&#x27;Fitted Line&#x27;)
+plt.title(&quot;Gradient Descent Fit&quot;)
+plt.legend()
+plt.show()</code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>EXPERIMENT 5: Linear Regression with L1 (Lasso) and L2 (Ridge) Regularization</div>
+  <pre><code></code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>print(&quot;\n&quot; + &quot;=&quot;*50)</div>
+  <pre><code>print(&quot;EXPERIMENT 5: Linear Regression with L1 &amp; L2&quot;)
+print(&quot;=&quot;*50)
+
+# 1. Import libraries
+from sklearn.datasets import load_diabetes
+from sklearn.linear_model import LinearRegression, Lasso, Ridge
+from sklearn.metrics import mean_squared_error
+
+# 2. Data Collection
+diabetes = load_diabetes()
+X = diabetes.data
+y = diabetes.target
+
+# 3. Data Preprocessing
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+
+# 4. Split the dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 5. Model Training (Linear, Lasso / L1, Ridge / L2)
+lr = LinearRegression().fit(X_train, y_train)
+lasso = Lasso(alpha=0.1).fit(X_train, y_train)
+ridge = Ridge(alpha=0.1).fit(X_train, y_train)
+
+# 6. Prediction and Evaluation
+mse_lr = mean_squared_error(y_test, lr.predict(X_test))
+mse_lasso = mean_squared_error(y_test, lasso.predict(X_test))
+mse_ridge = mean_squared_error(y_test, ridge.predict(X_test))
+
+print(&quot;Linear Regression MSE :&quot;, mse_lr)
+print(&quot;Lasso (L1) MSE        :&quot;, mse_lasso)
+print(&quot;Ridge (L2) MSE        :&quot;, mse_ridge)
+
+# 7. Visualization (Comparing MSE of models)
+models = [&#x27;Linear&#x27;, &#x27;Lasso (L1)&#x27;, &#x27;Ridge (L2)&#x27;]
+errors = [mse_lr, mse_lasso, mse_ridge]
+
+plt.bar(models, errors, color=[&#x27;skyblue&#x27;, &#x27;salmon&#x27;, &#x27;lightgreen&#x27;])
+plt.title(&quot;Model Comparison - Mean Squared Error&quot;)
+plt.ylabel(&quot;MSE&quot;)
+plt.show()</code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>EXPERIMENT 6: Support Vector Machines (SVM) for Classification</div>
+  <pre><code></code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>print(&quot;\n&quot; + &quot;=&quot;*50)</div>
+  <pre><code>print(&quot;EXPERIMENT 6: Support Vector Machines (SVM)&quot;)
+print(&quot;=&quot;*50)
+
+# 1. Import libraries
+from sklearn.svm import SVC
+
+# 2. Data Collection
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# 3. Data Preprocessing
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+
+# 4. Split the dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 5. Model Training (SVM with RBF Kernel)
+model = SVC(kernel=&#x27;rbf&#x27;, random_state=42)
+model.fit(X_train, y_train)
+
+# 6. Prediction
+y_pred = model.predict(X_test)
+
+# 7. Model Evaluation &amp; Visualization
+print(&quot;Accuracy:&quot;, accuracy_score(y_test, y_pred))
+print(&quot;\nClassification Report:\n&quot;, classification_report(y_test, y_pred))
+
+# Visualizing Confusion Matrix
+ConfusionMatrixDisplay.from_estimator(model, X_test, y_test, cmap=&#x27;Blues&#x27;)
+plt.title(&quot;Confusion Matrix - SVM (RBF)&quot;)
+plt.show()</code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>EXPERIMENT 7: Logistic Regression for Binary Classification</div>
+  <pre><code></code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>print(&quot;\n&quot; + &quot;=&quot;*50)</div>
+  <pre><code>print(&quot;EXPERIMENT 7: Logistic Regression for Binary Classification&quot;)
+print(&quot;=&quot;*50)
+
+# 1. Import libraries
+from sklearn.datasets import load_breast_cancer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import RocCurveDisplay
+
+# 2. Data Collection (Standard Binary Classification Dataset)
+cancer = load_breast_cancer()
+X = cancer.data
+y = cancer.target
+
+# 3. Data Preprocessing
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+
+# 4. Split the dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 5. Model Training
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# 6. Prediction
+y_pred = model.predict(X_test)
+
+# 7. Model Evaluation &amp; Visualization
+print(&quot;Accuracy:&quot;, accuracy_score(y_test, y_pred))
+print(&quot;\nConfusion Matrix:\n&quot;, confusion_matrix(y_test, y_pred))
+print(&quot;\nClassification Report:\n&quot;, classification_report(y_test, y_pred))
+
+# Visualizations: Confusion Matrix &amp; ROC Curve
+fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+ConfusionMatrixDisplay.from_estimator(model, X_test, y_test, ax=axes[0], cmap=&#x27;Blues&#x27;)
+axes[0].set_title(&quot;Confusion Matrix&quot;)
+
+RocCurveDisplay.from_estimator(model, X_test, y_test, ax=axes[1])
+axes[1].set_title(&quot;ROC Curve&quot;)
+plt.show()</code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>EXPERIMENT 8: Logic Gates using MP Neurons</div>
+  <pre><code></code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>print(&quot;\n&quot; + &quot;=&quot;*50)</div>
+  <pre><code>print(&quot;EXPERIMENT 8: Logic Gates using MP Neurons&quot;)
+print(&quot;=&quot;*50)
+
+# 1. Import libraries (already imported numpy and matplotlib)
+
+# 2. Data Collection (Logic Gate Truth Tables)
+X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+y_and = np.array([0, 0, 0, 1])
+y_or  = np.array([0, 1, 1, 1])
+
+# 3. MP Neuron Function: sum(x * w) &gt;= threshold
+def mp_neuron(inputs, weights, threshold):
+    total = np.dot(inputs, weights)
+    return np.where(total &gt;= threshold, 1, 0)
+
+# 4. Prediction
+pred_and = mp_neuron(X, weights=[1, 1], threshold=2)
+pred_or  = mp_neuron(X, weights=[1, 1], threshold=1)
+
+print(&quot;AND Gate Predictions:&quot;, pred_and)
+print(&quot;OR Gate Predictions :&quot;, pred_or)
+
+# 5. Visualization (Decision Boundaries)
+plt.figure(figsize=(10, 4))
+
+# Subplot 1: AND Gate
+plt.subplot(1, 2, 1)
+plt.scatter(X[:, 0], X[:, 1], c=y_and, cmap=&#x27;bwr&#x27;, s=100, edgecolors=&#x27;k&#x27;)
+x_line = np.linspace(-0.5, 1.5, 10)
+plt.plot(x_line, 2 - x_line, &#x27;g--&#x27;, label=&quot;Boundary (x1+x2=2)&quot;)
+plt.xlim(-0.5, 1.5); plt.ylim(-0.5, 1.5)
+plt.title(&quot;AND Gate (Threshold = 2)&quot;)
+plt.legend()
+
+# Subplot 2: OR Gate
+plt.subplot(1, 2, 2)
+plt.scatter(X[:, 0], X[:, 1], c=y_or, cmap=&#x27;bwr&#x27;, s=100, edgecolors=&#x27;k&#x27;)
+plt.plot(x_line, 1 - x_line, &#x27;g--&#x27;, label=&quot;Boundary (x1+x2=1)&quot;)
+plt.xlim(-0.5, 1.5); plt.ylim(-0.5, 1.5)
+plt.title(&quot;OR Gate (Threshold = 1)&quot;)
+plt.legend()
+plt.show()</code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>EXPERIMENT 9: Multi-Layer Perceptron (MLP) with Backpropagation Weight Changes</div>
+  <pre><code></code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>print(&quot;\n&quot; + &quot;=&quot;*50)</div>
+  <pre><code>print(&quot;EXPERIMENT 9: Multi-Layer Perceptron (MLP) with Backprop&quot;)
+print(&quot;=&quot;*50)
+
+# 1. Import libraries
+from sklearn.datasets import make_classification
+
+# 2. Data Collection (Library Dataset)
+X, y = make_classification(n_samples=50, n_features=2, n_informative=2, n_redundant=0, random_state=42)
+y = y.reshape(-1, 1)
+
+# 3. Activation Function &amp; Derivative
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+def sigmoid_derivative(x):
+    return x * (1 - x)
+
+# 4. Initialize Network Weights (2 -&gt; 2 -&gt; 1)
+np.random.seed(42)
+W1 = np.random.uniform(size=(2, 2))  # Input to Hidden
+W2 = np.random.uniform(size=(2, 1))  # Hidden to Output
+lr = 0.1
+losses = []
+
+print(&quot;Initial W1:\n&quot;, W1)
+print(&quot;Initial W2:\n&quot;, W2)
+
+# 5. Training with Backpropagation (Record Weight Changes)
+for epoch in range(1, 501):
+    # Forward Pass
+    hidden_output = sigmoid(np.dot(X, W1))
+    output = sigmoid(np.dot(hidden_output, W2))
+    
+    # Loss Calculation
+    error = y - output
+    losses.append(np.mean(error ** 2))
+    
+    # Backward Pass (Gradients)
+    d_output = error * sigmoid_derivative(output)
+    d_hidden = d_output.dot(W2.T) * sigmoid_derivative(hidden_output)
+    
+    # Weight Changes (Delta W)
+    delta_W2 = hidden_output.T.dot(d_output) * lr
+    delta_W1 = X.T.dot(d_hidden) * lr
+    
+    # Update Weights
+    W2 += delta_W2
+    W1 += delta_W1
+    
+    if epoch in [1, 250, 500]:
+        print(f&quot;\n--- Epoch {epoch} ---&quot;)
+        print(&quot;Delta W2 (Weight Change):\n&quot;, delta_W2)
+        print(&quot;Updated W2:\n&quot;, W2)
+
+# 6. Visualization (Loss Reduction Curve)
+plt.plot(losses, color=&#x27;purple&#x27;)
+plt.title(&quot;MLP Backpropagation - Loss vs Epochs&quot;)
+plt.xlabel(&quot;Epoch&quot;)
+plt.ylabel(&quot;Mean Squared Error&quot;)
+plt.show()</code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>EXPERIMENT 10: Supervised Hebbian Learning Rule</div>
+  <pre><code></code></pre>
+</div>
+
+<div class='experiment'>
+  <div class='exp-title'>print(&quot;\n&quot; + &quot;=&quot;*50)</div>
+  <pre><code>print(&quot;EXPERIMENT 10: Supervised Hebbian Learning Rule&quot;)
+print(&quot;=&quot;*50)
+
+# 1. Import libraries (already imported)
+
+# 2. Data Collection (Bipolar Dataset: AND Gate)
+X = np.array([
+    [-1, -1],
+    [-1,  1],
+    [ 1, -1],
+    [ 1,  1]
+])
+y = np.array([-1, -1, -1, 1])
+
+# 3. Initialize Weights and Bias
+w = np.zeros(2)
+b = 0.0
+
+# 4. Supervised Hebbian Learning (Record Weight Changes)
+print(f&quot;{&#x27;Step&#x27;:&lt;5} | {&#x27;Input x&#x27;:&lt;10} | {&#x27;Target y&#x27;:&lt;8} | {&#x27;Delta w&#x27;:&lt;10} | {&#x27;New w&#x27;:&lt;10} | {&#x27;New b&#x27;:&lt;5}&quot;)
+print(&quot;-&quot; * 60)
+
+for i in range(len(X)):
+    delta_w = X[i] * y[i]
+    delta_b = y[i]
+    
+    # Update
+    w += delta_w
+    b += delta_b
+    
+    print(f&quot;{i+1:&lt;5} | {str(X[i]):&lt;10} | {y[i]:&lt;8} | {str(delta_w):&lt;10} | {str(w):&lt;10} | {b:&lt;5}&quot;)
+
+# 5. Prediction &amp; Classification Behaviour
+print(&quot;\n--- Classification Results ---&quot;)
+for i in range(len(X)):
+    net = np.dot(X[i], w) + b
+    y_pred = 1 if net &gt;= 0 else -1
+    print(f&quot;Pattern {X[i]} -&gt; Predicted: {y_pred:2d}, Actual: {y[i]:2d}&quot;)
+
+# 6. Visualization (Decision Boundary)
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap=&#x27;bwr&#x27;, s=120, edgecolors=&#x27;k&#x27;)
+# Decision boundary line: w1*x1 + w2*x2 + b = 0 =&gt; x2 = (-w1*x1 - b) / w2
+x_vals = np.linspace(-2, 2, 10)
+y_vals = (-w[0] * x_vals - b) / w[1]
+plt.plot(x_vals, y_vals, &#x27;k--&#x27;, label=&quot;Decision Boundary&quot;)
+
+plt.xlim(-2, 2); plt.ylim(-2, 2)
+plt.title(&quot;Hebbian Learning - Decision Boundary&quot;)
+plt.xlabel(&quot;X1&quot;); plt.ylabel(&quot;X2&quot;)
+plt.legend()
+plt.show()
+
+print(&quot;\nAll 10 experiments executed successfully!&quot;)</code></pre>
+</div>
+
+</body>
+</html>
